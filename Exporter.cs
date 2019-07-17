@@ -25,8 +25,6 @@ namespace AssetStudioCmd
                 var bitmap = converter.ConvertToBitmap(true);
                 if (bitmap == null)
                     return false;
-                if (ExportFileExists(exportFullName))
-                    return false;
                 bitmap.Save(exportFullName, dstFormat);
                 bitmap.Dispose();
                 return true;
@@ -53,8 +51,6 @@ namespace AssetStudioCmd
             var exportFullName = exportPath + Path.GetFileNameWithoutExtension(oriPath) + "." + format;
             if (format == "wav" && converter.IsFMODSupport)
             {
-                if (ExportFileExists(exportFullName))
-                    return false;
                 var buffer = converter.ConvertToWav();
                 if (buffer == null)
                     return false;
@@ -267,8 +263,6 @@ namespace AssetStudioCmd
                     dstFormat = ImageFormat.Jpeg;
                     break;
             }
-            if (ExportFileExists(exportFullName))
-                return false;
             var bitmap = SpriteHelper.GetImageFromSprite((Sprite)item.Asset);
             if (bitmap != null)
             {
